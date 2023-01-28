@@ -2,7 +2,6 @@ package com.driver;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -67,9 +66,8 @@ public class WhatsappService {
         // The 'i^th' created message has message id 'i'.
         // Return the message id.
         int id= whatsappRepository.getMessageId()+1;
-        Date date=new Date();
         whatsappRepository.setMessageId(id);
-        Message message=new Message(id, content, date);
+        Message message=new Message(id, content);
         return id;
     }
 
