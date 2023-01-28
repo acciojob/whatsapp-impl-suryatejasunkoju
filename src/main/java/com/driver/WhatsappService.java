@@ -120,7 +120,7 @@ public class WhatsappService {
             throw new Exception("User is not a participant");
         }
         //Throw "Approver does not have rights" if the approver is not the current admin of the group
-        if(isUserAdminOfGroup(approver, group)){
+        if(!isUserAdminOfGroup(approver, group)){
             //if approver is not admin
             throw new Exception("Approver does not have rights");
         }
