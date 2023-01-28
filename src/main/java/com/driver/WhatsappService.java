@@ -88,11 +88,14 @@ public class WhatsappService {
         senderMap.put(message, sender);
 
         //updating groupMessageMap
-        HashMap<Group, List<Message>> groupMessageMap=whatsappRepository.getGroupMessageMap();
-        List<Message> messageList=groupMessageMap.get(group);
-        messageList.add(message);
-        //added below one line
-        whatsappRepository.getGroupMessageMap().put(group,messageList);
+//        HashMap<Group, List<Message>> groupMessageMap=whatsappRepository.getGroupMessageMap();
+//        List<Message> messageList=groupMessageMap.get(group);
+//        messageList.add(message);
+        //converging 3 lines of above code into one line and commenting below uncommented line
+        whatsappRepository.getGroupMessageMap().get(group).add(message);
+
+        //added below one line, its not required as List is stored with reference in HashMap
+//        whatsappRepository.getGroupMessageMap().put(group,messageList);
         //adding below line, instead of messageList.size();
         return whatsappRepository.getGroupMessageMap().get(group).size();
     }
