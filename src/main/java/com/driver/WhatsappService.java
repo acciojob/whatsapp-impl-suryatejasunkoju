@@ -128,7 +128,7 @@ public class WhatsappService {
     public boolean isUserAdminOfGroup(User user, Group group){
         HashMap<Group, User> adminMap=whatsappRepository.getAdminMap();
         User currAdmin=adminMap.get(group);
-        if(currAdmin.equals(user)){
+        if(currAdmin==(user)){
             return true;
         }
         return false;
