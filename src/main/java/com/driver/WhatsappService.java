@@ -91,6 +91,8 @@ public class WhatsappService {
         HashMap<Group, List<Message>> groupMessageMap=whatsappRepository.getGroupMessageMap();
         List<Message> messageList=groupMessageMap.get(group);
         messageList.add(message);
+        //added below one line
+        whatsappRepository.getGroupMessageMap().put(group,messageList);
         return messageList.size();
     }
     public  boolean userExistsInGroup(User user, Group group){
