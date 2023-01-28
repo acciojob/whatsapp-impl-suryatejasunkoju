@@ -104,6 +104,10 @@ public class WhatsappService {
         return false;
     }
 
+    /*
+    Failures:
+    TestCases.testChangeAdmin_UserNotParticipant:273 expected: <Approver does not have rights> but was: <User is not a participant>
+    */
     public String changeAdmin(User approver, User user, Group group) throws Exception{
         //Throw "Group does not exist" if the mentioned group does not exist
         HashMap<Group, List<User>> groupUserMap=whatsappRepository.getGroupUserMap();
@@ -111,15 +115,16 @@ public class WhatsappService {
             //groupUserMap doesn't contain group
             throw new Exception("Group does not exist");
         }
+        //Throw "User is not a participant" if the user is not a part of the group
+        if(!userExistsInGroup(user, group)){
+            throw new Exception("User is not a participant");
+        }
         //Throw "Approver does not have rights" if the approver is not the current admin of the group
         if(isUserAdminOfGroup(approver, group)){
             //if approver is not admin
             throw new Exception("Approver does not have rights");
         }
-        //Throw "User is not a participant" if the user is not a part of the group
-        if(!userExistsInGroup(user, group)){
-            throw new Exception("User is not a participant");
-        }
+
         //Change the admin of the group to "user" and return "SUCCESS". Note that at one time there is only one admin and the admin rights are transferred from approver to user.
         HashMap<Group, User> adminMap=whatsappRepository.getAdminMap();
         adminMap.put(group, user);
