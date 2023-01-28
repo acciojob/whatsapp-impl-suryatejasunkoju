@@ -8,8 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 
 public class WhatsappService {
-    @Autowired
-    WhatsappRepository whatsappRepository;
+
+    WhatsappRepository whatsappRepository=new WhatsappRepository();
     public String createUser(String name, String mobile) throws Exception {
         HashSet<String> userMobile=whatsappRepository.getUserMobile();
         //If the mobile number exists in database, throw "User already exists" exception
